@@ -1277,6 +1277,31 @@ bool Linker::WritePrgFile(DiskImage* image, const char* filename)
 	return false;
 }
 
+bool Linker::WriteHandyFile(const char* filename)
+{
+	FILE* file;
+	fopen_s(&file, filename, "wb");
+	if (file)
+	{
+		fputc(0x80, file);
+		fputc(0x08, file);
+		fputc(mProgramStart >> 8, file);
+		fputc(mProgramStart & 0xff, file);
+		unsigned short length = mProgramEnd - mProgramStart + 10;
+		fputc((length) >> 8, file);
+		fputc((length) & 0xff, file);
+
+		fputc(0x42, file);
+		fputc(0x53, file);
+		fputc(0x39, file);
+		fputc(0x33, file);
+
+		ptrdiff_t	done = fwrite(mMemory + mProgramStart, 1, mProgramEnd - mProgramStart, file);
+		fclose(file);
+		return true;
+	}
+	return false;
+}
 bool Linker::WriteXexFile(const char* filename)
 {
 	FILE* file;

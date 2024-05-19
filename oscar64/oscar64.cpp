@@ -401,6 +401,11 @@ int main2(int argc, const char** argv)
 			compiler->mTargetMachine = TMACH_ATARI;
 			compiler->AddDefine(Ident::Unique("__ATARI__"), "1");
 		}
+		else if (!strcmp(targetMachine, "lynx"))
+		{
+			compiler->mTargetMachine = TMACH_ATARI_LYNX;
+			compiler->AddDefine(Ident::Unique("__ATARI_LYNX__"), "1");
+		}
 		else
 			compiler->mErrors->Error(loc, EERR_COMMAND_LINE, "Invalid target machine option", targetMachine);
 
@@ -426,6 +431,11 @@ int main2(int argc, const char** argv)
 				break;
 			}
 			compiler->AddDefine(Ident::Unique("__NES__"), "1");
+		}
+		else if (compiler->mTargetMachine == TMACH_ATARI_LYNX)
+		{
+			compiler->mCompilerOptions |= COPT_TARGET_PRG;
+			compiler->AddDefine(Ident::Unique("OSCAR_TARGET_ATARI_LYNX"), "1");
 		}
 		else if (!strcmp(targetFormat, "prg"))
 		{

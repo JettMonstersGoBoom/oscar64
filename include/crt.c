@@ -195,6 +195,8 @@ w0:
 		lda #$00
 		sta $8000
 #endif
+#elif defined(OSCAR_TARGET_ATARI_LYNX)
+
 #else		
 		byt	0x0b
 		byt 0x08

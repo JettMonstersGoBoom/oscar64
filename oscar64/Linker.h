@@ -276,6 +276,7 @@ public:
 	bool WriteLblFile(const char* filename);
 	bool WriteCrtFile(const char* filename, uint16 id);
 	bool WriteBinFile(const char* filename);
+	bool WriteHandyFile(const char* filename);
 	bool WriteNesFile(const char* filename, TargetMachine machine);
 	bool WriteMlbFile(const char* filename, TargetMachine machine);
 	bool WriteDbjFile(FILE * file);

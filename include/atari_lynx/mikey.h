@@ -74,3 +74,11 @@ struct __mikey {
                                     // 0xFDC0 - 0xFDFF  not used
 };
 #define MIKEY (*(struct __mikey *)0xFD00)
+
+#define DISPCTL_DISABLE 0b00000000
+#define DISPCTL_ENABLE  0b00000001
+#define DISPCTL_FLIP    0b00000010
+#define DISPCTL_2BIT    0b00000000
+#define DISPCTL_4BIT    0b00000100
+#define DISPCTL_MONO    0b00000000
+#define DISPCTL_COLOR   0b00001000

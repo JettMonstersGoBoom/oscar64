@@ -1,6 +1,8 @@
 #include <atari_lynx/suzy.h>
 #include <atari_lynx/mikey.h>
 
+// https://www.monlynx.de/lynx/hardware.html 
+
 void SUZY_wait()
 {
 	__asm {
@@ -14,9 +16,6 @@ void SUZY_wait()
 }
 
 
-#define DISPLAY_COLOR 8
-#define DISPLAY_4bpp 4
-#define DISPLAY_ENABLE 1
 
 void lynx_init() {
 	//	vid memory to the furthest point from code 
@@ -27,8 +26,8 @@ void lynx_init() {
 	SUZY.hoff = 8;
 	SUZY.voff = 8;
 	SUZY.sprsys = 0;
-	SUZY.sprinit = 0xf3;
-	MIKEY.dispctl = DISPLAY_4bpp | DISPLAY_COLOR | DISPLAY_ENABLE;
+	SUZY.sprinit = 0xf3;	//	at least 100ms before sprites are drawn 
+	MIKEY.dispctl = DISPCTL_4BIT | DISPCTL_COLOR | DISPCTL_ENABLE;
 	SUZY.suzybusen = 1;
 
 	MIKEY.timer0.reload = 0x9e;
